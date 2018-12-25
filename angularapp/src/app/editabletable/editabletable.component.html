@@ -1,0 +1,67 @@
+<form #myform="ngForm"  (ngsubmit)="myForm.value">
+  <table class="table" id="example" class="display" cellspacing="0" width="100%" class='table table-striped table-bordered' editMode="true" >
+ <thead>
+   <tr> 
+    <th>Document ID</th>
+    <th>Document Type</th>
+    <th>Source</th>
+    <th>Document Date</th>
+ <th>Trip ID</th>
+ <th>Status</th>
+ <th>Notes</th>
+ <th *ngIf="qwerty != document.documentId">update</th>
+ <th *ngIf="qwerty != document.documentId">Delete</th>
+ <th *ngIf="qwerty == document.documentId">Save</th>
+ <th *ngIf="qwerty == document.documentId">Cancel</th>
+</tr>
+</thead>
+     <tbody>
+    <tr *ngFor="let document of documents,let i = index" id="row">
+<td>
+    <div *ngIf="!document.editMode">{{i+1}}</div>
+        <div *ngIf="document.editMode">
+          <input type="text" [(ngModel)]="document.documentId">
+        </div>
+     <!-- <span *ngIf="editedIndex !== i">{{i+1}}</span>
+    <input type="text" class="form-control"  *ngIf="editedIndex === i"> -->
+     </td>
+<td >
+    <span *ngIf="qwerty != document.documentId">{{document.type}}</span>
+    <input type="text" class="form-control" name="type" [(ngModel)]="document.type" *ngIf="qwerty == document.documentId">
+    </td>
+<td>
+    <span *ngIf="qwerty != document.documentId">{{document.source}}</span>
+    <input type="text" class="form-control"  name="source" [(ngModel)]="document.source"  *ngIf="qwerty == document.documentId">
+    </td>
+<td>
+    <span *ngIf="qwerty != document.documentId">{{document.date}}</span>
+    <input type="date" class="form-control"  name = "date" [(ngModel)]="document.date" *ngIf="qwerty == document.documentId">
+    </td>
+<td>
+    <span *ngIf="qwerty != document.documentId">{{document.tripId}}</span>
+    <input type="text" class="form-control"  name="tripId" [(ngModel)]="document.tripId"  *ngIf="qwerty == document.documentId">
+    </td>
+<td>
+    <span *ngIf="qwerty != document.documentId">{{document.status}}</span>
+    <input type="text" class="form-control" name="status" [(ngModel)]="document.status" *ngIf="qwerty == document.documentId">
+    </td>
+<td>
+    <span *ngIf="qwerty != document.documentId">{{document.notes}}</span>
+    <input type="text" class="form-control"  name="notes" [(ngModel)]="document.notes" *ngIf="qwerty == document.documentId">
+    </td>
+<td>
+  <a  (click)="edit(document)" *ngIf="qwerty != document.documentId"><span class="glyphicon glyphicon-pencil" ></span></a>
+  <a  (click)="update(document)"  *ngIf="qwerty == document.documentId" ><span class="glyphicon glyphicon-ok" type="submit" ></span></a>
+  </td>
+  <td>
+    <a (click)="delete(document)" *ngIf="qwerty != document.documentId"><span class="glyphicon glyphicon-trash"></span></a>
+    <a  (click)="ok(document)" *ngIf="qwerty == document.documentId"><span class="glyphicon glyphicon-remove" ></span></a>
+  </td>
+</tr>
+
+</tbody>
+
+</table>
+</form> 
+
+
